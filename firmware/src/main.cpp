@@ -2,11 +2,14 @@
 
 #include "configuration.h"
 #include "display_task.h"
+#include "sound_task.h"
 #include "interface_task.h"
 #include "motor_task.h"
 
 Configuration config;
 
+static SoundTask sound_task(0);
+static SoundTask* sound_task_p = &sound_task;
 #if SK_DISPLAY
 static DisplayTask display_task(0);
 static DisplayTask* display_task_p = &display_task;
@@ -25,6 +28,7 @@ void setup() {
 
   // Connect display to motor_task's knob state feed
   motor_task.addListener(display_task.getKnobStateQueue());
+  motor_task.addListener(sound_task.getKnobStateQueue());
   #endif
 
   interface_task.begin();

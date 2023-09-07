@@ -5,6 +5,9 @@
 #include "sound_task.h"
 #include "interface_task.h"
 #include "motor_task.h"
+#include "sound/XT_I2S_Audio.h"
+#include "sound/WavData.h"
+#include "sound/MusicDefinitions.h"
 
 Configuration config;
 
@@ -17,6 +20,10 @@ static DisplayTask* display_task_p = &display_task;
 static DisplayTask* display_task_p = nullptr;
 #endif
 static MotorTask motor_task(1, config);
+
+XT_I2S_Class I2SAudio(I2S_LRC, I2S_BCLK, I2S_DOUT, I2S_NUM_0);
+
+XT_Wav_Class MySound(WavData16BitStereo);
 
 
 InterfaceTask interface_task(0, motor_task, display_task_p);

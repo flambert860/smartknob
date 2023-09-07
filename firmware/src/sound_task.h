@@ -7,9 +7,6 @@
 #include "logger.h"
 #include "proto_gen/smartknob.pb.h"
 #include "task.h"
-#include "sound/XT_I2S_Audio.h"
-#include "sound/WavData.h"
-#include "sound/MusicDefinitions.h"
 
 
 #define I2S_DOUT 22 // i2S Data out oin
@@ -24,10 +21,6 @@ class SoundTask : public Task<SoundTask> {
         ~SoundTask();
 
         QueueHandle_t getKnobStateQueue();
-
-        XT_I2S_Class I2SAudio(I2S_LRC, I2S_BCLK, I2S_DOUT, I2S_NUM_0);
-
-        XT_Wav_Class MySound(WavData16BitStereo);
 
         void setLogger(Logger* logger);
 
